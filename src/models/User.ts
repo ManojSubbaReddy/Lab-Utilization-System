@@ -5,8 +5,12 @@ export interface IUser extends Document {
   userId: string;
   email: string;
   password: string;
-  role: 'student' | 'faculty' | 'departmentHead' | 'labManager' | 'technicalStaff';
+  role: 'student' | 'faculty' | 'ICTS-Lab Manager' | 'Technical Staff';
   department: string;
+  lastLoggedIn: {
+    type: Date,
+    default: null, // or Date.now if you want to initialize it
+  },
   academicDetails?: {
     year?: number;
     courses?: string[];
@@ -26,7 +30,7 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
   password: { type: String, required: true },
   role: {
     type: String,
-    enum: ['student', 'faculty', 'departmentHead', 'labManager', 'technicalStaff'],
+    enum: ["student", "faculty", "ICTS-Lab Manager", "Technical Staff"],
     required: true,
   },
   department: { type: String, required: true },
@@ -56,12 +60,13 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
 UserSchema.pre<IUser>('save', async function (next) {
   if (!this.userId) {
     const prefixMap: Record<string, string> = {
-      student: 'ST',
-      faculty: 'FT',
-      departmentHead: 'DH',
-      labManager: 'LM',
-      technicalStaff: 'TS',
+      "student": "ST",
+      "faculty": "FT",
+      "ICTS-Lab Manager": "ILM",
+      "Technical Staff": "TS",
     };
+    
+   
     const prefix = prefixMap[this.role];
     const deptCode = this.department.toUpperCase();
     // Count existing users with the same role and department

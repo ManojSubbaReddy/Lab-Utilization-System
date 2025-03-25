@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,7 +37,9 @@ export default function EditLabPage() {
   const labId = params?.id; // dynamic route parameter
 
   const [lab, setLab] = useState<Lab | null>(null);
-  const [labInchargeOptions, setLabInchargeOptions] = useState<LabInchargeOption[]>([]);
+  const [labInchargeOptions, setLabInchargeOptions] = useState<
+    LabInchargeOption[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,7 +60,7 @@ export default function EditLabPage() {
     fetch(`/api/labs/${labId}`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -80,19 +88,19 @@ export default function EditLabPage() {
   useEffect(() => {
     fetch("/api/lab-incharges", {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch lab incharges");
         }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setLabInchargeOptions(data.labIncharges);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching lab incharges:", err);
       });
   }, []);
@@ -112,7 +120,7 @@ export default function EditLabPage() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name, location, capacity, labIncharge }),
       });
@@ -120,7 +128,7 @@ export default function EditLabPage() {
       if (!res.ok) {
         throw new Error(data.message || "Failed to update lab");
       }
-      router.push("/dashboard/faculty/labs");
+      router.push("/dashboard/ICTS");
     } catch (err: any) {
       setError(err.message);
     }
@@ -210,7 +218,10 @@ export default function EditLabPage() {
               </form>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" onClick={() => router.push("/dashboard/faculty/labs")}>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/dashboard/ICTS")}
+              >
                 Back to Lab List
               </Button>
             </CardFooter>

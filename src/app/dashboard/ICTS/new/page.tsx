@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,26 +27,28 @@ export default function CreateLabPage() {
   const [location, setLocation] = useState("AB1");
   const [capacity, setCapacity] = useState<number>(0);
   const [labIncharge, setLabIncharge] = useState("");
-  const [labInchargeOptions, setLabInchargeOptions] = useState<LabInchargeOption[]>([]);
+  const [labInchargeOptions, setLabInchargeOptions] = useState<
+    LabInchargeOption[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   // Fetch lab incharge options
   useEffect(() => {
     fetch("/api/lab-incharges", {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch lab incharges");
         }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setLabInchargeOptions(data.labIncharges);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching lab incharges:", err);
       });
   }, []);
@@ -59,7 +67,7 @@ export default function CreateLabPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name, location, capacity, labIncharge }),
       });
@@ -67,7 +75,7 @@ export default function CreateLabPage() {
       if (!res.ok) {
         throw new Error(data.message || "Failed to create lab");
       }
-      router.push("/dashboard/faculty/labs");
+      router.push("/dashboard/ICTS");
     } catch (err: any) {
       setError(err.message);
     }
@@ -82,7 +90,9 @@ export default function CreateLabPage() {
           {error && <p className="mb-4 text-red-600">{error}</p>}
           <Card className="bg-white shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">New Lab Details</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                New Lab Details
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -142,7 +152,10 @@ export default function CreateLabPage() {
               </form>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" onClick={() => router.push("/dashboard/faculty/labs")}>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/dashboard/ICTS")}
+              >
                 Back to Lab List
               </Button>
             </CardFooter>

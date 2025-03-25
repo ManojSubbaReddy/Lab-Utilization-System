@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // List all faculty users as lab incharge options
-    const labIncharges = await User.find({ role: "faculty" }).select("userId email profile");
+    const labIncharges = await User.find({ role: "ICTS-Lab Manager" }).select("userId email profile");
     return res.status(200).json({ labIncharges });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
