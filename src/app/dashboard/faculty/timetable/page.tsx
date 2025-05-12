@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -46,7 +46,7 @@ export default function TimetablePage() {
       const res = await fetch(`/api/labs/timetable?date=${selectedDate}`, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -100,12 +100,16 @@ export default function TimetablePage() {
             <>
               {timetable.length === 0 ? (
                 <div className="text-center text-2xl text-gray-600">
-                  No labs scheduled on {new Date(date).toLocaleDateString("en-US")}
+                  No labs scheduled on{" "}
+                  {new Date(date).toLocaleDateString("en-US")}
                 </div>
               ) : (
                 <div className="grid grid-cols-1 gap-8">
                   {timetable.map((entry) => (
-                    <Card key={entry.lab._id} className="bg-white shadow-lg rounded-lg p-4">
+                    <Card
+                      key={entry.lab._id}
+                      className="bg-white shadow-lg rounded-lg p-4"
+                    >
                       <CardHeader>
                         <CardTitle className="text-2xl font-bold text-indigo-700">
                           {entry.lab.name} (ID: {entry.lab.labId})
@@ -113,13 +117,16 @@ export default function TimetablePage() {
                       </CardHeader>
                       <CardContent>
                         {entry.sessions.length === 0 ? (
-                          <p className="text-green-600 font-semibold">Free all day!</p>
+                          <p className="text-green-600 font-semibold">
+                            Free all day!
+                          </p>
                         ) : (
                           <ul className="divide-y divide-gray-200">
                             {entry.sessions.map((session) => (
                               <li key={session._id} className="py-2">
                                 <p>
-                                  <strong>Time:</strong> {session.startTime} - {session.endTime}
+                                  <strong>Time:</strong> {session.startTime} -{" "}
+                                  {session.endTime}
                                 </p>
                                 <p>
                                   <strong>Status:</strong> {session.status}

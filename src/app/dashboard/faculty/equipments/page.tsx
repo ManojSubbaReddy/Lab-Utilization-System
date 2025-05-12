@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import Navbar from "@/components/Navbarf";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Equipment {
@@ -32,7 +38,7 @@ export default function EquipmentListPage() {
     fetch("/api/equipment", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then(async (res) => {
@@ -66,7 +72,7 @@ export default function EquipmentListPage() {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!res.ok) {
@@ -104,7 +110,9 @@ export default function EquipmentListPage() {
           {/* Header with Add New Equipment button */}
           <header className="flex justify-between items-center">
             <h1 className="text-4xl font-bold">Equipments</h1>
-            <Button onClick={() => router.push("/dashboard/faculty/equipments/new")}>
+            <Button
+              onClick={() => router.push("/dashboard/faculty/equipments/new")}
+            >
               Add New Equipment
             </Button>
           </header>
@@ -121,19 +129,41 @@ export default function EquipmentListPage() {
                   className="bg-white shadow-xl rounded-lg border border-gray-200 hover:shadow-2xl transition-all duration-300"
                 >
                   <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-indigo-700">{eq.name}</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-indigo-700">
+                      {eq.name}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p><strong>Equipment ID:</strong> {eq.equipmentId}</p>
-                    <p><strong>Lab:</strong> {eq.lab}</p>
-                    {eq.specifications && <p><strong>Specs:</strong> {eq.specifications}</p>}
-                    <p><strong>Status:</strong> {eq.status}</p>
+                    <p>
+                      <strong>Equipment ID:</strong> {eq.equipmentId}
+                    </p>
+                    <p>
+                      <strong>Lab:</strong> {eq.lab}
+                    </p>
+                    {eq.specifications && (
+                      <p>
+                        <strong>Specs:</strong> {eq.specifications}
+                      </p>
+                    )}
+                    <p>
+                      <strong>Status:</strong> {eq.status}
+                    </p>
                   </CardContent>
                   <CardFooter className="flex justify-between">
-                    <Button variant="outline" onClick={() => router.push(`/dashboard/faculty/equipments/edit/${eq._id}`)}>
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        router.push(
+                          `/dashboard/faculty/equipments/edit/${eq._id}`
+                        )
+                      }
+                    >
                       Edit
                     </Button>
-                    <Button variant="destructive" onClick={() => handleDelete(eq._id)}>
+                    <Button
+                      variant="destructive"
+                      onClick={() => handleDelete(eq._id)}
+                    >
                       Delete
                     </Button>
                   </CardFooter>

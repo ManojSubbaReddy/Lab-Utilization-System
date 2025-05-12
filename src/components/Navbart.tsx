@@ -16,33 +16,20 @@ export default function Navbar() {
     <nav className="bg-indigo-600 text-white px-6 py-4 flex items-center justify-between">
       <div className="text-2xl font-bold">Lab Utilisation System</div>
       <div className="space-x-4 flex items-center">
-        <Link href="/dashboard/student" className="text-sm hover:underline">
+        <Link href="/dashboard/ts" className="text-sm hover:underline">
           Dashboard
         </Link>
-        <Link
-          href="/dashboard/student/profile"
-          className="text-sm hover:underline"
-        >
+        {/* <Link href="/dashboard/ts/profile" className="text-sm hover:underline">
           Profile
-        </Link>
+        </Link> */}
+
         <Link
-          href="/dashboard/student/schedule-lab"
-          className="text-sm hover:underline"
-        >
-          Schedule Lab
-        </Link>
-        <Link
-          href="/dashboard/student/notifications"
+          href="/dashboard/ts/notifications"
           className="text-sm hover:underline"
         >
           Notifications
         </Link>
-        <Link
-          href="/dashboard/student/booking-history"
-          className="text-sm hover:underline"
-        >
-          Booking History
-        </Link>
+
         <Button
           variant="outline"
           onClick={handleLogout}

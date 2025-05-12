@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import {
   Card,
   CardHeader,
@@ -43,7 +43,7 @@ export default function ScheduledSessionsPage() {
     fetch("/api/scheduled-labs/me", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -70,10 +70,10 @@ export default function ScheduledSessionsPage() {
       router.push("/auth/login");
       return;
     }
-  
+
     const apiUrl = `/api/scheduled-labs/${sessionId}`;
     console.log("Cancelling session at:", apiUrl);
-  
+
     try {
       const res = await fetch(apiUrl, {
         method: "PUT",
@@ -83,15 +83,17 @@ export default function ScheduledSessionsPage() {
         },
         body: JSON.stringify({ status: "cancelled" }),
       });
-  
+
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.message || "Failed to cancel session");
       }
-  
+
       setSessions((prev) =>
         prev.map((session) =>
-          session._id === sessionId ? { ...session, status: "cancelled" } : session
+          session._id === sessionId
+            ? { ...session, status: "cancelled" }
+            : session
         )
       );
     } catch (err: any) {
@@ -99,7 +101,6 @@ export default function ScheduledSessionsPage() {
       setError(err.message);
     }
   };
-  
 
   if (loading) {
     return (
@@ -158,7 +159,8 @@ export default function ScheduledSessionsPage() {
                       {new Date(session.date).toLocaleDateString()}
                     </p>
                     <p>
-                      <strong>Time:</strong> {session.startTime} - {session.endTime}
+                      <strong>Time:</strong> {session.startTime} -{" "}
+                      {session.endTime}
                     </p>
                     <p>
                       <strong>Status:</strong> {session.status}

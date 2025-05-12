@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import {
   Card,
   CardHeader,
@@ -39,7 +39,7 @@ export default function NewEquipmentPage() {
     fetch("/api/labs", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then(async (res) => {
@@ -80,7 +80,7 @@ export default function NewEquipmentPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           lab: selectedLab,
@@ -112,7 +112,9 @@ export default function NewEquipmentPage() {
           <Card className="bg-white shadow-xl rounded-lg border border-gray-200 hover:shadow-2xl transition-all duration-300">
             <form onSubmit={handleSubmit} className="space-y-4 p-6">
               <div>
-                <Label htmlFor="lab">Lab <span className="text-red-600">*</span></Label>
+                <Label htmlFor="lab">
+                  Lab <span className="text-red-600">*</span>
+                </Label>
                 <select
                   id="lab"
                   value={selectedLab}
@@ -129,7 +131,9 @@ export default function NewEquipmentPage() {
                 </select>
               </div>
               <div>
-                <Label htmlFor="name">Equipment Name <span className="text-red-600">*</span></Label>
+                <Label htmlFor="name">
+                  Equipment Name <span className="text-red-600">*</span>
+                </Label>
                 <Input
                   id="name"
                   type="text"

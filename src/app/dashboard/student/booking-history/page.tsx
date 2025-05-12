@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import {
   Card,
   CardHeader,
@@ -45,7 +45,7 @@ export default function LabBookingHistoryPage() {
         const res = await fetch("/api/scheduled-labs/me", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
@@ -114,7 +114,8 @@ export default function LabBookingHistoryPage() {
                       {new Date(session.date).toLocaleDateString("en-US")}
                     </p>
                     <p>
-                      <strong>Time:</strong> {session.startTime} - {session.endTime}
+                      <strong>Time:</strong> {session.startTime} -{" "}
+                      {session.endTime}
                     </p>
                     <p>
                       <strong>Status:</strong> {session.status}

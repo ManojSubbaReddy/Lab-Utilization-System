@@ -16,10 +16,7 @@ export default function Navbar() {
     <nav className="bg-indigo-600 text-white px-6 py-4 flex items-center justify-between">
       <div className="text-2xl font-bold">Lab Utilisation System</div>
       <div className="space-x-4 flex items-center">
-        <Link
-          href="/dashboard/faculty"
-          className="text-sm hover:underline"
-        >
+        <Link href="/dashboard/faculty" className="text-sm hover:underline">
           Dashboard
         </Link>
         <Link
@@ -28,12 +25,12 @@ export default function Navbar() {
         >
           Profile
         </Link>
-        {/* <Link
-          href="/dashboard/faculty/schedule-sessions"
+        <Link
+          href="/dashboard/faculty/schedule-lab"
           className="text-sm hover:underline"
         >
           Schedule Lab
-        </Link> */}
+        </Link>
         <Link
           href="/dashboard/faculty/notifications"
           className="text-sm hover:underline"

@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -46,16 +52,16 @@ export default function FacultyProfilePage() {
     fetch("/api/faculty/me", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch faculty details");
         }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data && data.faculty) {
           setFacultyData(data.faculty);
           // Pre-fill form fields
@@ -65,7 +71,7 @@ export default function FacultyProfilePage() {
         }
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching faculty details:", err);
         router.push("/auth/login");
       });
@@ -74,14 +80,14 @@ export default function FacultyProfilePage() {
   // Handler to add a new course
   const handleAddCourse = () => {
     if (newCourse.trim() !== "") {
-      setCourses(prev => [...prev, newCourse.trim()]);
+      setCourses((prev) => [...prev, newCourse.trim()]);
       setNewCourse("");
     }
   };
 
   // Handler to remove a course
   const handleRemoveCourse = (index: number) => {
-    setCourses(prev => prev.filter((_, i) => i !== index));
+    setCourses((prev) => prev.filter((_, i) => i !== index));
   };
 
   // Handler to update profile
@@ -101,7 +107,7 @@ export default function FacultyProfilePage() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           profile: {
@@ -125,10 +131,18 @@ export default function FacultyProfilePage() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        Loading...
+      </div>
+    );
   }
   if (!facultyData) {
-    return <div className="flex items-center justify-center min-h-screen">Profile not found.</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        Profile not found.
+      </div>
+    );
   }
 
   return (
@@ -138,13 +152,19 @@ export default function FacultyProfilePage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Page Header */}
           <header className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-800">Edit Profile</h1>
-            <p className="text-gray-600">Update your personal and academic details</p>
+            <h1 className="text-4xl font-extrabold text-gray-800">
+              Edit Profile
+            </h1>
+            <p className="text-gray-600">
+              Update your personal and academic details
+            </p>
           </header>
 
           <Card className="bg-white shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">Profile Details</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                Profile Details
+              </CardTitle>
             </CardHeader>
             <CardContent>
               {message && <p className="mb-4 text-green-600">{message}</p>}
@@ -178,7 +198,11 @@ export default function FacultyProfilePage() {
                     {courses.map((course, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <span className="flex-1">{course}</span>
-                        <Button variant="outline" size="sm" onClick={() => handleRemoveCourse(index)}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleRemoveCourse(index)}
+                        >
                           Remove
                         </Button>
                       </div>
@@ -203,7 +227,10 @@ export default function FacultyProfilePage() {
               </form>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <Button variant="outline" onClick={() => router.push("/dashboard/faculty")}>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/dashboard/faculty")}
+              >
                 Back to Dashboard
               </Button>
             </CardFooter>

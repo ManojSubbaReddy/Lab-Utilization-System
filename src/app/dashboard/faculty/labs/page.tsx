@@ -2,8 +2,14 @@
 
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import Navbar from "@/components/Navbarf";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,7 +52,7 @@ export default function LabsPage() {
       const res = await fetch(`/api/filter-lab?${params.toString()}`, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -87,11 +93,16 @@ export default function LabsPage() {
         <div className="max-w-7xl mx-auto space-y-8">
           <header className="text-center mb-8">
             <h1 className="text-4xl font-bold">Labs</h1>
-            <p className="text-gray-600">Filter labs based on location, and capacity</p>
+            <p className="text-gray-600">
+              Filter labs based on location, and capacity
+            </p>
           </header>
 
           {/* Filter Form */}
-          <form onSubmit={handleFilterSubmit} className="bg-white p-4 rounded shadow-md mb-8">
+          <form
+            onSubmit={handleFilterSubmit}
+            className="bg-white p-4 rounded shadow-md mb-8"
+          >
             <div className="flex flex-wrap gap-4">
               <div className="flex-1">
                 <Label htmlFor="location">Location</Label>
@@ -142,12 +153,20 @@ export default function LabsPage() {
                   className="bg-white shadow-lg rounded-lg border border-gray-200 hover:shadow-2xl transition-all duration-300"
                 >
                   <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-indigo-700">{lab.name}</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-indigo-700">
+                      {lab.name}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p><strong>Lab ID:</strong> {lab.labId}</p>
-                    <p><strong>Location:</strong> {lab.location}</p>
-                    <p><strong>Capacity:</strong> {lab.capacity}</p>
+                    <p>
+                      <strong>Lab ID:</strong> {lab.labId}
+                    </p>
+                    <p>
+                      <strong>Location:</strong> {lab.location}
+                    </p>
+                    <p>
+                      <strong>Capacity:</strong> {lab.capacity}
+                    </p>
                   </CardContent>
                 </Card>
               ))}

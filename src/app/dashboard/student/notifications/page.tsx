@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -31,7 +31,7 @@ export default function NotificationsPage() {
         const res = await fetch("/api/notifications", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
@@ -90,7 +90,9 @@ export default function NotificationsPage() {
                 >
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold text-indigo-700">
-                      {notif.type === "lab-booking" ? "Lab Booking" : "Equipment Request"}
+                      {notif.type === "lab-booking"
+                        ? "Lab Booking"
+                        : "Equipment Request"}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>

@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import Navbar from "@/components/Navbarf";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Lab {
@@ -38,7 +44,7 @@ export default function LabBookingHistoryPage() {
         const res = await fetch("/api/scheduled-labs/me", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
@@ -83,7 +89,9 @@ export default function LabBookingHistoryPage() {
             <h1 className="text-4xl font-bold">My Booked Sessions</h1>
           </header>
           {sessions.length === 0 ? (
-            <div className="text-center text-2xl text-gray-600">😢 No scheduled sessions found.</div>
+            <div className="text-center text-2xl text-gray-600">
+              😢 No scheduled sessions found.
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {sessions.map((session) => (
@@ -101,10 +109,12 @@ export default function LabBookingHistoryPage() {
                       <strong>Lab ID:</strong> {session.lab.labId}
                     </p>
                     <p>
-                      <strong>Date:</strong> {new Date(session.date).toLocaleDateString("en-US")}
+                      <strong>Date:</strong>{" "}
+                      {new Date(session.date).toLocaleDateString("en-US")}
                     </p>
                     <p>
-                      <strong>Time:</strong> {session.startTime} - {session.endTime}
+                      <strong>Time:</strong> {session.startTime} -{" "}
+                      {session.endTime}
                     </p>
                     <p>
                       <strong>Status:</strong> {session.status}

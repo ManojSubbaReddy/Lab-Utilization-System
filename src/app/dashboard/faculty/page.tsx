@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import {
   Card,
   CardHeader,
@@ -66,7 +66,7 @@ export default function FacultyDashboard() {
     fetch("/api/faculty/me", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then(async (res) => {
@@ -102,7 +102,7 @@ export default function FacultyDashboard() {
         const res = await fetch("/api/notifications", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
@@ -132,7 +132,7 @@ export default function FacultyDashboard() {
         const res = await fetch("/api/scheduled-labs/me", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (!res.ok) {
@@ -184,7 +184,9 @@ export default function FacultyDashboard() {
               <CardContent className="p-6 space-y-3">
                 <div className="flex justify-between">
                   <span className="font-semibold text-gray-700">Name:</span>
-                  <span className="text-gray-900">{facultyData.profile.name}</span>
+                  <span className="text-gray-900">
+                    {facultyData.profile.name}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-gray-700">User ID:</span>
@@ -196,17 +198,25 @@ export default function FacultyDashboard() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-gray-700">Dept:</span>
-                  <span className="text-gray-900">{facultyData.department}</span>
+                  <span className="text-gray-900">
+                    {facultyData.department}
+                  </span>
                 </div>
                 {facultyData.profile.designation && (
                   <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Designation:</span>
-                    <span className="text-gray-900">{facultyData.profile.designation}</span>
+                    <span className="font-semibold text-gray-700">
+                      Designation:
+                    </span>
+                    <span className="text-gray-900">
+                      {facultyData.profile.designation}
+                    </span>
                   </div>
                 )}
                 {facultyData.academicDetails?.courses && (
                   <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Courses:</span>
+                    <span className="font-semibold text-gray-700">
+                      Courses:
+                    </span>
                     <span className="text-gray-900">
                       {facultyData.academicDetails.courses.join(", ")}
                     </span>
@@ -277,7 +287,9 @@ export default function FacultyDashboard() {
               </CardHeader>
               <CardContent className="overflow-y-auto max-h-64">
                 {notifications.length === 0 ? (
-                  <p className="text-gray-600">No notifications at this time.</p>
+                  <p className="text-gray-600">
+                    No notifications at this time.
+                  </p>
                 ) : (
                   <ul className="divide-y divide-gray-200">
                     {notifications.map((notification) => (
@@ -285,7 +297,9 @@ export default function FacultyDashboard() {
                         <p>{notification.message}</p>
                         <p className="text-sm text-gray-500">
                           {notification.createdAt
-                            ? new Date(notification.createdAt).toLocaleDateString("en-US")
+                            ? new Date(
+                                notification.createdAt
+                              ).toLocaleDateString("en-US")
                             : "No date available"}
                         </p>
                       </li>
@@ -304,23 +318,39 @@ export default function FacultyDashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-wrap gap-4 p-6">
-              <Button onClick={() => router.push("/dashboard/faculty/scheduled-sessions")}>
+              <Button
+                onClick={() =>
+                  router.push("/dashboard/faculty/scheduled-sessions")
+                }
+              >
                 View Scheduled Sessions
               </Button>
-              <Button onClick={() => router.push("/dashboard/faculty/schedule-lab")}>
+              <Button
+                onClick={() => router.push("/dashboard/faculty/schedule-lab")}
+              >
                 Schedule Lab Session
               </Button>
-              <Button onClick={() => router.push("/dashboard/faculty/requests")}>
+              <Button
+                onClick={() => router.push("/dashboard/faculty/requests")}
+              >
                 Request Resources
               </Button>
-              <Button onClick={() => router.push("/dashboard/faculty/notifications")}>
+              <Button
+                onClick={() => router.push("/dashboard/faculty/notifications")}
+              >
                 View Notifications
               </Button>
               {/* New Timetable Option */}
-              <Button onClick={() => router.push("/dashboard/faculty/timetable")}>
+              <Button
+                onClick={() => router.push("/dashboard/faculty/timetable")}
+              >
                 View Timetable
               </Button>
-              <Button onClick={() => router.push("/dashboard/faculty/booking-history")}>
+              <Button
+                onClick={() =>
+                  router.push("/dashboard/faculty/booking-history")
+                }
+              >
                 Booking History
               </Button>
               <Button onClick={() => router.push("/dashboard/faculty/labs")}>

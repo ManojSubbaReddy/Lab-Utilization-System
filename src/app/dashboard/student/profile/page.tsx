@@ -2,7 +2,7 @@
 
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbarf";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -57,7 +57,7 @@ export default function StudentProfilePage() {
     fetch("/api/student/me", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -123,7 +123,7 @@ export default function StudentProfilePage() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           profile: {
@@ -171,7 +171,9 @@ export default function StudentProfilePage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Page Header */}
           <header className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-800">Edit Profile</h1>
+            <h1 className="text-4xl font-extrabold text-gray-800">
+              Edit Profile
+            </h1>
             <p className="text-gray-600">
               Update your personal and academic details
             </p>
@@ -240,7 +242,10 @@ export default function StudentProfilePage() {
               </form>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <Button variant="outline" onClick={() => router.push("/dashboard/student")}>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/dashboard/student")}
+              >
                 Back to Dashboard
               </Button>
             </CardFooter>

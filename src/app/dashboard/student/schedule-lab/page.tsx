@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import Navbar from "@/components/Navbarf";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,7 +39,7 @@ export default function ScheduleLabPage() {
     fetch("/api/labs", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -73,7 +79,7 @@ export default function ScheduleLabPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           lab: selectedLab,
@@ -101,12 +107,16 @@ export default function ScheduleLabPage() {
       <Navbar />
       <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 p-8">
         <div className="max-w-3xl mx-auto space-y-8">
-          <h1 className="text-4xl font-bold mb-8 text-center">Schedule Lab Session</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">
+            Schedule Lab Session
+          </h1>
           {error && <p className="text-red-600">{error}</p>}
           {message && <p className="text-green-600">{message}</p>}
           <Card className="bg-white shadow-xl rounded-lg border border-gray-200 hover:shadow-2xl transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">New Session Details</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                New Session Details
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -164,7 +174,12 @@ export default function ScheduleLabPage() {
               </form>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" onClick={() => router.push("/dashboard/student/scheduled-sessions")}>
+              <Button
+                variant="outline"
+                onClick={() =>
+                  router.push("/dashboard/student/scheduled-sessions")
+                }
+              >
                 Back to Scheduled Sessions
               </Button>
             </CardFooter>
